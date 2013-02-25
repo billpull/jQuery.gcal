@@ -281,7 +281,8 @@
 
 		var fetchFeed = function () {
 			var storedEvents = gcalFeedPluginGlobal.gcalEvents[opts['start-min']];
-			if (storedEvents != []) {
+
+			if (storedEvents == [] || storedEvents === undefined) {
 				var feedUrlCall = $.ajax({
 					url: feed,
 					dataType: 'jsonp',
