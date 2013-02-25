@@ -1,4 +1,4 @@
-knockout-bootstrap
+jQuery.gcal.js
 ==================
 
 #### Requires
@@ -41,4 +41,3 @@ A Jquery Plugin for getting a google calendar feed from url
 [Download](https://raw.github.com/billpull/jquery.gcal/master/build/jquery.gcal.min.js)
 
 **License**: MIT [http://www.opensource.org/licenses/mit-license.php](http://www.opensource.org/licenses/mit-license.php)
-
