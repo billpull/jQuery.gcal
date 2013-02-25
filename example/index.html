@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+	<head>
+		<<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/style.css" />
+
+	
+	</head>
+	<body>
+		<div class="container">
+			<div class="span5" id="calendar"></div>
+		</div>
+
+		<!-- Modal -->
+		<div id="gc-event-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-header">
+		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		    <h3 id="gc-event-modal-header"></h3>
+		  </div>
+		  <div class="modal-body" id="gc-event-modal-body"></div>
+		  <div class="modal-footer">
+		    <a class="btn btn-primary" id="gc-event-modal-link" target="_blank">Add Event To Calendar</a>
+		  </div>
+		</div>
+		
+		<script src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/date.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap-modal.js"></script>
+		<script type="text/javascript" src="../build/jquery.gcal.min.js"></script>
+		<script>
+			$(function() {
+				var calUrl = 'http://www.google.com/calendar/feeds/developer-calendar@google.com/public/full'
+
+				$('#calendar').gcalFeed(calUrl);
+			});
+		</script>
+	</body>
+</html>
+

@@ -1,0 +1,122 @@
+/*
+Theme Name: 	Jake Sherman Music
+Theme URI: 		http://www.jakeshermanmusic.com
+Description: 	Theme for personal website of musician Jake Sherman
+Version: 		1.0
+Author: 		William Pullen
+Author URI: 	http://github.com/billpull
+Tags: 			music,subtle,minimal
+*/
+
+/*
+===========================
+CONTENTS:
+
+01 Bootstrap
+02 Typography
+03 Page Styles
+04 Media queries 
+===========================
+*/
+
+/* ---------------------------------------------------------------------------------------------------------- 
+01 Bootstrap ----------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+ #gc-month-controls {
+ 	padding-top:15px;
+ }
+
+.event_shadow{
+	background:transparent url('../img/event_shadow.png') 0 0 no-repeat;
+	width:522px;
+	height:60px;
+	display:block;
+	margin-top:-20px;
+}
+
+.event_shadow_btm{
+	background:transparent url('../img/event_shadow_btm.png') 0 0 no-repeat;
+	width:522px;
+	height:60px;
+	display:block;
+	margin-top:-20px;
+}
+
+#gc-no-events {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+	font-size: 20px;
+	margin: 0 10px;
+}
+
+.gc-loading {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+	font-size: 20px;
+	margin: 0 10px;
+}
+.gc-loading-txt {
+	float: left;
+}
+.gc-loading-img {
+	background:transparent url('../img/gc-loading.gif');
+	width: 43px;
+	height: 11px;
+	display:block;
+	float:left;
+	margin-left: 20px;
+	margin-top:5px;
+}
+
+.gc-cal-feed-wrap {
+	width:500px;
+	max-height:500px;
+	overflow-y:auto;
+	overflow-x:hidden;
+}
+
+.gc-event-list {
+	margin-left:20px;
+	list-style-type: none;
+	width: 85%;
+}
+.gc-event-item{
+	color: #fff;
+    cursor: pointer;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+	background:#333;
+	padding:20px 0;
+	padding-left:20px;
+	border-radius:0;
+	text-shadow:-1px -1px 0px #000;
+	width: 99%;
+	box-shadow:1px 1px 3px #333;
+	float:left;
+	margin:5px 10px;
+}
+.gc-event-item:hover{
+	background-color:#555;
+	text-shadow:-1px -1px 0px #333;
+}
+.gc-event-date{
+	float:left;
+	border-right: 1px solid #fff;
+	font-size:20px;
+	padding-right:10px;
+	text-align: center;
+}
+.gc-event-day{
+	font-size:30px;
+	display:block;
+	border-bottom:1px solid #fff;
+	margin-bottom:5px;
+	padding-bottom:10px;
+}
+.gc-event-month{
+	display:block;
+}
+.gc-event-title{
+	font-size: 20px;
+	margin-left: 10px;
+	display: block;
+	padding-top: 12px;
+	float: left;
+}

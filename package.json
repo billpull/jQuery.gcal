@@ -1,0 +1,26 @@
+{
+  "name": "jquery.gcal",
+  "version": "0.0.1",
+  "description": "A Jquery Plugin for getting a google calendar feed from url",
+  "main": "src/jquer.gcal.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/billpull/jquery.gcal.git"
+  },
+  "keywords": [
+    "jquery",
+    "google calendar",
+    "gcal",
+    "calendar"
+  ],
+  "dependencies": {
+    "jQuery": ">= 1.7.4",
+    "datejs": ">= 0"
+  },
+  "author": "Bill Pullen",
+  "license": "MIT",
+  "readmeFilename": "README.md"
+}
