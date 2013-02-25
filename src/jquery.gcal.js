@@ -42,8 +42,8 @@
 									<h3 id='gc-month-year-str'><%= date_string =%></h3>\
 								</div>\
 								<div class='span2 clearfix' id='gc-month-controls'>\
-									<button class='btn' id='gc-today-btn'>Today</button>\
 									<div class='btn-group'>\
+										<button class='btn' id='gc-today-btn'>Today</button>\
 										<button class='btn' id='gc-month-decrease'>&lt;</button>\
 										<button class='btn' id='gc-month-increase'>&gt;</button>\
 									</div>\
