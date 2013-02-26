@@ -26,7 +26,7 @@ A Jquery Plugin for getting a google calendar feed from url
 </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<script type="text/javascript" src="date.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
 <script type="text/javascript" src="bootstrap-modal.js"></script>
 <script type="text/javascript" src="jquery.gcal.min.js"></script>
 <script>
