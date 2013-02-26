@@ -37,11 +37,9 @@
 						  </li>";
 
 		// Controls Template
-		var monthPickTmpl = "<div id='gc-month-control' class='row'>\
-								<div class='span3'>\
-									<h3 id='gc-month-year-str'><%= date_string =%></h3>\
-								</div>\
-								<div class='span2 clearfix' id='gc-month-controls'>\
+		var monthPickTmpl = "<div id='gc-month-control'>\
+								<h3 id='gc-month-year-str'><%= date_string =%></h3>\
+								<div id='gc-month-controls'>\
 									<div class='btn-group'>\
 										<button class='btn' id='gc-today-btn'>Today</button>\
 										<button class='btn' id='gc-month-decrease'>&lt;</button>\
@@ -49,7 +47,7 @@
 									</div>\
 								</div>\
 							</div>\
-							<div class='row'>\
+							<div>\
 								<div class='event_shadow'></div>\
 							</div>";
 
@@ -145,90 +143,37 @@
 		};
 
 		// set up first and last day of current month
-		var todayDate = new Date();
-
-		var dateToString = function (date) {
-			var month = date.getUTCMonth() + 1;
-			var year = date.getUTCFullYear();
-			var day = date.getUTCDate();
-
-			var dateStr = year.toString() + "-" + gcalFeedPluginGlobal.pad2(month).toString() + "-" + gcalFeedPluginGlobal.pad2(day).toString();
-
-			return dateStr;
-		};
+		var todayDate = moment();
 
 		var createStartDate = function(date) {
-			var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+			var firstDay = date.subtract('d', 1);
 
-			return dateToString(firstDay) + "T00:00:00";
+			return firstDay.format('YYYY-MM-DD') + "T00:00:00";
 		};
 
 		var createEndDate = function(date) {
-			var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+			var lastDay = date.add('d', 1);
 
-			return dateToString(lastDay) + "T23:59:59";
+			return lastDay.format('YYYY-MM-DD') + "T23:59:59";
 		};
 
-		var convertTo12Hr = function (hour) {
-			if (hour === 0) {
-				return 12;
-			} else if (hour > 12) {
-				return hour - 12;
+		var humanReadableDate = function (startTime, endTime) {
+			var startTimeMomentCmp = moment(startTime.format('YYYY-MM-DD'));
+			var endTimeMomentCmp = moment(endTime.format('YYYY-MM-DD'));
+
+			var areSameDay = startTimeMomentCmp.isSame(endTimeMomentCmp);
+
+			var humanReadableDateStr = ''
+
+			if (areSameDay) {
+				humanReadableDateStr += startTime.format("ddd, MMMM Do YYYY, h:mma");
+				humanReadableDateStr += " - " + endTime.format("h:mma");
 			} else {
-				return hour;
+				humanReadableDateStr += startTime.format("ddd, MMMM Do YYYY, h:mma");
+				humanReadableDateStr += " - " + endTime.format("ddd, MMMM Do YYYY, h:mma");
 			}
-		};
 
-		var parseMeridien = function (hour) {
-			if (hour > 12) {
-				return "pm";
-			} else {
-				return "am";
-			}
-		};
-
-		var formatTimeStr = function (date) {
-			var hour = convertTo12Hr(date.getHours());
-			var meridien = parseMeridien(date.getHours());
-			var timeStr = hour + ":" + gcalFeedPluginGlobal.pad2(date.getMinutes()) + meridien;
-
-			return timeStr;
-		};
-
-		var dayOfWeekMonthTime = function (date) {
-			var dayOfWeek = gcalFeedPluginGlobal.dayNames[date.getDay()];
-			var month = gcalFeedPluginGlobal.monthNames[date.getMonth()];
-
-			var dayOfWeekMonthStr = dayOfWeek + ", " + month + " " + date.getDate() + ", ";
-			var timeStr = formatTimeStr(date);
-
-			dayOfWeekMonthStr += timeStr;
-
-			return dayOfWeekMonthStr;
-		};
-
-		var humanReadableDate = function(startDate, endDate) {
-			var startMonth = startDate.getMonth();
-			var startDay = startDate.getDate();
-			var endMonth = endDate.getMonth();
-			var endDay = endDate.getDate();
-
-			var startMonthDayStr = startMonth + "-" + startDay;
-			var endMonthDayStr = endMonth + "-" + endDay;
-
-			if (startMonthDayStr === endMonthDayStr) {
-				var startDayOfWeekMonthTimeStr = dayOfWeekMonthTime(startDate);
-				var endTimeStr = formatTimeStr(endDate);
-
-				startDayOfWeekMonthTimeStr += " - " + endTimeStr;
-
-				return startDayOfWeekMonthTimeStr;
-			} else {
-				var startDayOfWeekMonthTimeStr = dayOfWeekMonthTime(startDate);
-				var endDayOfWeekMonthTimeStr = dayOfWeekMonthTime(endDate);
-
-				return startDayOfWeekMonthTimeStr + " - " + endDayOfWeekMonthTimeStr;
-			}
+			return humanReadableDateStr;
 		};
 
 		//Default options
@@ -255,7 +200,7 @@
 
 		// Check that the feed was passed in
 		if (feed === '' && !feed.match(gcalUrlPat)) {
-			throw "Incorrect Google Calendar Feed Url";
+			window.alert("Incorrect Google Calendar Feed Url");
 		}
 
 		// format feed url
@@ -294,18 +239,14 @@
 				feedUrlCall.done(function(data) {
 					callbackFn(data);
 				});
-
-				feedUrlCall.fail(function(data) {
-					throw data;
-				});
 			} else {
 				renderEventItems(storedEvents);
 			}
 		};
 
 		var formatDatePickStr = function (date) {
-			var month = gcalFeedPluginGlobal.monthNames[date.getMonth()];
-			var year = date.getFullYear();
+			var month = date.format('MMMM');
+			var year = date.format('YYYY');
 
 			var dateStr = month + " " + year;
 
@@ -321,9 +262,9 @@
 		var fetchFeedDateChange = function (delta) {
 			insertLoadingTmpl();
 
-			var newDate = new Date(opts['start-min'])
-									.add(1).days()
-									.add(delta).months();
+			var newDate = moment(new Date(opts['start-min']))
+									.add('d', 1)
+									.add('M', delta);
 			
 			opts['start-min'] = createStartDate(newDate);
 			opts['start-max'] = createEndDate(newDate);
@@ -335,7 +276,7 @@
 
 		var init = function () {
 			//Add Buttons
-			var fetchDate = new Date(opts['start-min']).add(1).days();
+			var fetchDate = moment(new Date(opts['start-min'])).add('d',1);
 			var dateStr = formatDatePickStr(fetchDate);
 			var monthPickHtml = monthPickTmpl.replace('<%= date_string =%>', dateStr);
 
@@ -374,8 +315,8 @@
 
 				if (eventInfo) {
 					var title = eventInfo.title.$t;
-					var startTime = new Date(eventInfo.gd$when[0].startTime);
-					var endTime = new Date(eventInfo.gd$when[0].endTime);
+					var startTime = moment(new Date(eventInfo.gd$when[0].startTime));
+					var endTime = moment(new Date(eventInfo.gd$when[0].endTime));
 					var eventLocation = eventInfo.gd$where[0].valueString;
 					var eventLocationUrl = encodeURIComponent(eventLocation);
 					var eventDesc = eventInfo.content.$t;

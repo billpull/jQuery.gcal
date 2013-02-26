@@ -3,7 +3,7 @@ jQuery.gcal.js
 
 #### Requires
 - jQuery ( no minimum version identified yet )
-- datejs [http://www.datejs.com/](http://www.datejs.com/)
+- [momentjs](http://momentjs.com/)
 - Bootstrap Modal (used for clicking an event item)
 
 A Jquery Plugin for getting a google calendar feed from url
