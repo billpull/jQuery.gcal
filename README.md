@@ -6,7 +6,31 @@ jQuery.gcal.js
 - [momentjs](http://momentjs.com/)
 - Bootstrap Modal (used for clicking an event item)
 
-A Jquery Plugin for getting a google calendar feed from url
+A Jquery Plugin for displaying a Google calendar feed from url
+
+##Options And Defaults
+
+- ctz: ''
+- fields: '' 
+- futureevents: false
+- max-attendees: ''
+- max-results: 9999
+- orderby: 'starttime'
+- recurrence-expansion-start: ''
+- recurrence-expansion-end: ''
+- singleevents: true
+- showdeleted: false
+- showhidden: false
+- sortorder: 'ascending'
+- start-min: first day of the current month
+- start-max: last day of the current month
+- updated-min: ''
+- callback: gcalFeed internal callback
+
+[More Info](https://developers.google.com/google-apps/calendar/v2/reference#Parameters)
+
+
+##Example
 
 ```html
 <div class="container">
